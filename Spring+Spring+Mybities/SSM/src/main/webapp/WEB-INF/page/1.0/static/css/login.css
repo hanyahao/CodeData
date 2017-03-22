@@ -1,0 +1,198 @@
+@charset "utf-8";
+/** 清除内外边距 **/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */ dl, dt, dd, ul, ol, li, /* list elements 列表元素 */ pre, /* text formatting elements 文本格式元素 */ form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */ th, td /* table elements 表格元素 */ {
+    margin: 0;
+    padding: 0;
+}
+/** 默认字体 **/
+body, select, input, textarea, button {
+    font-family: 'Microsoft Yahei Light', 'Microsoft Yahei', Tahoma, Helvetica, Arial, '\5b8b\4f53', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+}
+/** border-box **/
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/** 禁止局部高亮 **/
+html{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+/** iOS/Mac OS 按钮样式还原 **/
+input[type=button], button {
+    -webkit-appearance:none;
+}
+
+html, body {
+    height: 100%;
+}
+textarea {resize: none;}
+a {text-decoration: none;}
+a:hover {text-decoration: none;}
+a:active {text-decoration: none;}
+a:link {text-decoration: none;}
+a:focus { outline: none; text-decoration: none; }
+/** 清除浮动 **/
+.clearfix:before, .clearfix:after {
+    display: table;
+    content: " ";
+}
+.clearfix:after { clear: both; }
+.clearfix{ zoom:1; } /* for IE7 */
+
+.l { float: left; }
+.r { float: right; }
+.tl { text-align: left; }
+.tc { text-align: center; }
+.tr { text-align: right; }
+
+/** Login Style **/
+body {
+    background: #517f99 url(images/admin-login-bg.png) no-repeat top center;
+}
+
+.footerr {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-width: 680px;
+    padding: 14px 0;
+    text-align: center;
+}
+.footerr span {
+    display: inline-block;
+    color: #cdcfdb;
+    font-size: 12px;
+    line-height: 39px;
+    border-bottom: 1px solid #cdcfdb;
+}
+.login-fix {
+    width: 680px;
+    margin: 0 auto;
+    padding-bottom: 68px;
+}
+.login-fix .title-big {
+    color: #58eeff;
+    font-size: 36px;
+    padding-top: 285px;
+    line-height: 2;
+    text-align: center;
+}
+.login-fix .title-sub {
+    text-align: center;
+}
+.login-fix .title-sub span {
+    display: inline-block;
+    font-size: 20px;
+    color: #fff;
+}
+.login-fix .title-sub span.border {
+    font-size: 0;
+    line-height: 0;
+    width: 156px;
+    border-bottom: 1px solid #fff;
+}
+.login-fix .slogan {
+    text-align: center;
+    font-size: 19px;
+    line-height: 1;
+    color: #fff;
+    margin-top:30px;
+}
+
+
+.login-fix .login-form {
+    width: 320px;
+    margin: 60px auto 0;
+}
+.login-fix .login-form .form-row {
+    margin-bottom: 24px;
+    position: relative;
+}
+.login-fix .login-form .form-row input {
+    border: none;
+    width: 320px;
+    padding: 0 1em 0 54px;
+    height: 57px;
+    font-size: 16px;
+    line-height: 57px;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: 20px center;
+}
+.login-fix .login-form .form-row i {
+    display: block;
+    width: 14px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.login-fix .login-form .form-row i.username {
+    background-image: url(images/input-ico-user.png);
+}
+.login-fix .login-form .form-row i.password {
+    background-image: url(images/input-ico-lock.png);
+}
+.login-fix .login-form button.submit {
+    width: 180px;
+    height: 45px;
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #fff;
+    cursor: pointer;
+}
+.login-fix .login-form button.submit:hover {
+    opacity: 0.85;
+}
+.login-fix .login-form .form-row span.error {
+    color: #ff8e8e;
+    text-shadow: 0px 0px 1px #000;
+    position: absolute;
+    top: 57px;
+    right: 0px;
+    display: inline-block;
+    line-height: 16px;
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+/*
+html,body {width:100%;height:100%;}
+body {background-color:#fff;}
+.login-page {background:url(images/members/login_bg.jpg) no-repeat center 100px;width:100%;height:600px;margin:auto;position:absolute;top:0;bottom:0;}
+.login-main {width:960px;height:600px;margin:0 auto;}
+.login-top {height:60px;padding:20px 0;}
+.login-top .logo {height:60px;float:left;}
+.login-top .logo a {display:block;text-indent:-999px;background:url(images/members/logo.png) no-repeat 0 0;width:180px;height:60px;overflow:hidden;}
+.login-middle {width:100%;height:400px;}
+.login-bottom {width:100%;font-size:0;text-align:center;padding:20px 0;left:0;bottom:0;}
+.login-bottom span {display:inline-block;font-size:12px;line-height:15px;padding:0 5px;}
+#frmLogin {width:400px;margin-top:50px;float:right;-moz-box-shadow:3px 3px 1px rgba(0,0,0,0.2);-webkit-box-shadow:3px 3px 1px rgba(0,0,0,0.2);box-shadow:3px 3px 1px rgba(0,0,0,0.2);}
+#frmLogin .title {background-color:#64a0d7;font-size:20px;color:#fff;line-height:60px;width:auto;height:60px;padding:0 20px;text-shadow:1px 1px 1px rgba(0,0,0,0.5);-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;}
+#frmLogin .form {background-color:#f2f2f2;padding:25px 25px 35px 25px;width:auto;-moz-border-radius:0 0 3px 3px;-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}
+#frmLogin input {font-size:18px;font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';width:290px;height:22px;padding:12px 45px 12px 10px;border:1px solid #dfdfdf;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+#frmLogin input.username {background:#f0eef0 url(images/members/login_input.png) no-repeat right 0;}
+#frmLogin input.password {background:#f0eef0 url(images/members/login_input.png) no-repeat right -46px;}
+#frmLogin button {font-size:14px;color:#fff;font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';height:33px;padding:0 15px;border:0;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+#frmLogin button.submit {background-color:#76b900;}
+#frmLogin button.submit:hover {background-color:#bad55e;}
+#frmLogin button.register {background-color:#dc6263;}
+#frmLogin button.register:hover {background-color:#f89291;}
+*/
+

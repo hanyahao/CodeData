@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weizhuo.db.dao.IndividualMapper" >
+  <resultMap id="BaseResultMap" type="com.weizhuo.db.model.Individual" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="individual_type_code" property="individualTypeCode" jdbcType="VARCHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="BIT" />
+    <result column="cell_phone" property="cellPhone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="id_no" property="idNo" jdbcType="VARCHAR" />
+    <result column="contact_address" property="contactAddress" jdbcType="VARCHAR" />
+    <result column="emgency_contactor" property="emgencyContactor" jdbcType="VARCHAR" />
+    <result column="contactor_relationship" property="contactorRelationship" jdbcType="VARCHAR" />
+    <result column="emgency_cell_phone" property="emgencyCellPhone" jdbcType="VARCHAR" />
+    <result column="emgency_contact_addr" property="emgencyContactAddr" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, individual_type_code, full_name, gender, cell_phone, email, id_no, contact_address, 
+    emgency_contactor, contactor_relationship, emgency_cell_phone, emgency_contact_addr, 
+    department_id, company_id, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from individual
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from individual
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.weizhuo.db.model.Individual" >
+    insert into individual (id, individual_type_code, full_name, 
+      gender, cell_phone, email, 
+      id_no, contact_address, emgency_contactor, 
+      contactor_relationship, emgency_cell_phone, 
+      emgency_contact_addr, department_id, company_id, 
+      create_datetime)
+    values (#{id,jdbcType=BIGINT}, #{individualTypeCode,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=BIT}, #{cellPhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{idNo,jdbcType=VARCHAR}, #{contactAddress,jdbcType=VARCHAR}, #{emgencyContactor,jdbcType=VARCHAR}, 
+      #{contactorRelationship,jdbcType=VARCHAR}, #{emgencyCellPhone,jdbcType=VARCHAR}, 
+      #{emgencyContactAddr,jdbcType=VARCHAR}, #{departmentId,jdbcType=BIGINT}, #{companyId,jdbcType=BIGINT}, 
+      #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weizhuo.db.model.Individual" >
+    insert into individual
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="individualTypeCode != null" >
+        individual_type_code,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="cellPhone != null" >
+        cell_phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="idNo != null" >
+        id_no,
+      </if>
+      <if test="contactAddress != null" >
+        contact_address,
+      </if>
+      <if test="emgencyContactor != null" >
+        emgency_contactor,
+      </if>
+      <if test="contactorRelationship != null" >
+        contactor_relationship,
+      </if>
+      <if test="emgencyCellPhone != null" >
+        emgency_cell_phone,
+      </if>
+      <if test="emgencyContactAddr != null" >
+        emgency_contact_addr,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="individualTypeCode != null" >
+        #{individualTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=BIT},
+      </if>
+      <if test="cellPhone != null" >
+        #{cellPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null" >
+        #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emgencyContactor != null" >
+        #{emgencyContactor,jdbcType=VARCHAR},
+      </if>
+      <if test="contactorRelationship != null" >
+        #{contactorRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="emgencyCellPhone != null" >
+        #{emgencyCellPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="emgencyContactAddr != null" >
+        #{emgencyContactAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weizhuo.db.model.Individual" >
+    update individual
+    <set >
+      <if test="individualTypeCode != null" >
+        individual_type_code = #{individualTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=BIT},
+      </if>
+      <if test="cellPhone != null" >
+        cell_phone = #{cellPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        id_no = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contactAddress != null" >
+        contact_address = #{contactAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="emgencyContactor != null" >
+        emgency_contactor = #{emgencyContactor,jdbcType=VARCHAR},
+      </if>
+      <if test="contactorRelationship != null" >
+        contactor_relationship = #{contactorRelationship,jdbcType=VARCHAR},
+      </if>
+      <if test="emgencyCellPhone != null" >
+        emgency_cell_phone = #{emgencyCellPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="emgencyContactAddr != null" >
+        emgency_contact_addr = #{emgencyContactAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weizhuo.db.model.Individual" >
+    update individual
+    set individual_type_code = #{individualTypeCode,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      cell_phone = #{cellPhone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      id_no = #{idNo,jdbcType=VARCHAR},
+      contact_address = #{contactAddress,jdbcType=VARCHAR},
+      emgency_contactor = #{emgencyContactor,jdbcType=VARCHAR},
+      contactor_relationship = #{contactorRelationship,jdbcType=VARCHAR},
+      emgency_cell_phone = #{emgencyCellPhone,jdbcType=VARCHAR},
+      emgency_contact_addr = #{emgencyContactAddr,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

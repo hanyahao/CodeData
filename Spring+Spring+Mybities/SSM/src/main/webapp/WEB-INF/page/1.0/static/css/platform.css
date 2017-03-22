@@ -1,0 +1,137 @@
+html,body {width:100%;}
+#main_nav {margin-left:50px;}
+#welcome {font-size:30px;}
+
+.assets-money {background:url(images/members/assets_icon_money.png) no-repeat 36px 13px;height:89px;padding-left:100px;}
+.assets-integral {background:url(images/members/assets_icon_integral.png) no-repeat 36px 13px;height:89px;padding-left:100px;}
+.cart-add {background:url(images/members/cart.png) no-repeat 0 3px;padding-left:16px;}
+.cart-set-num {background-color:#fff;border:1px solid #dfdfdf;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;-khtml-user-select:none;user-select:none;}
+.cart-set-num span {display:inline-block;font-size:12px;line-height:16px;}
+.cart-set-num p {display:inline-block;width:16px;cursor:pointer;}
+.cart-set-num p:hover {background-color:#eee;}
+.cart-set-num p.sub {border-right:1px solid #dfdfdf;float:left;}
+.cart-set-num p.add {border-left:1px solid #dfdfdf;float:right;}
+
+.order-form {width:100%;height:33px;margin-top:15px;overflow:hidden;}
+.order-form div {text-align:right;line-height:33px;}
+.order-form span.count {color:#f00;font-weight:bold;padding:0 5px;}
+.order-form span.amount {font-size:16px;color:#f00;font-weight:bold;}
+.order-form button {display:block;background-color:#dc6263;color:#fff;width:100px;height:33px;margin-left:20px;border:0;float:right;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+.order-form button:hover {background-color:#f89291;}
+
+span.error {color:red;margin-left:20px;}
+
+.cellphone {
+    position: relative;
+    height: 33px;
+    line-height: 33px;
+    font-size: 14px;
+}
+.cellphone .del {
+    position: absolute;
+    right: -14px;
+    top: -2px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    text-indent: 20em;
+    background-image: url(images/validate_icons.png);
+    background-repeat: no-repeat;
+    background-position: 0 -64px;
+}
+.wpnormal {
+    white-space: normal;
+    max-height: 90px;
+    overflow: hidden;
+}
+
+#JUI_DatePicker {
+    border-radius: 4px;
+}
+#JUI_DatePicker .calendar {
+    border-radius: 4px;
+}
+#JUI_DatePicker .calendar_close {
+    border: none;
+}
+#JUI_DatePicker .week_t {
+    background-color: transparent;
+}
+#JUI_DatePicker .week_d {
+    border-radius: 2px;
+}
+#JUI_DatePicker .calendar_bar {
+    background-color: #78C7CE;
+    color: white;
+}
+#JUI_DatePicker .btns input {
+    background-color: #DC6263;
+    color: white;
+    border-radius: 2px;
+}
+#JUI_DatePicker .btns input:hover {
+    background-color: #f89291;
+}
+#JUI_DatePicker .calendar_selyear {
+    border-radius: 4px;
+}
+#JUI_DatePicker .calendar_selmonth {
+    border-radius: 4px;
+}
+#JUI_DatePicker .week tr:first-child td {
+    border-bottom: 1px dashed #999;
+}
+
+#logs {
+    display: none;
+}
+#logs .logcnt {
+    width: 600px;
+    font-size: 14px;
+    line-height: 33px;
+    color: #999;
+}
+
+.select2-search input {
+    font-family: 'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';
+}
+.select2-display-none { display: none; }
+abbr.select2-search-choice-close {
+    float: none;
+}
+.select2-container .select2-choice {
+    height: 31px;
+    line-height: 31px;
+    background-image: none;
+    border-radius: 3px;
+    border-color: #e3e4e8;
+    float: none;
+}
+.select2-container .select2-choice abbr {
+    top: 9px;
+}
+.select2-container-active .select2-choice, .select2-container-active .select2-choices {
+    border-color: #e3e4e8;
+    box-shadow: none;
+}
+.select2-drop-active {
+    border-color: #e3e4e8;
+}
+.select2-container .select2-choice .select2-arrow {
+    border-color: #e3e4e8;
+    border-radius: 0;
+    background-image: none;
+}
+.select2-container .select2-choice .select2-arrow b {
+    background-position: 0 3px;
+}
+.select2-dropdown-open .select2-choice .select2-arrow b {
+    background-position: -18px 3px;
+}
+.select2-drop.select2-drop-above.select2-drop-active {
+    border-color: #e3e4e8;
+}
+.select2-dropdown-open.select2-drop-above .select2-choice, .select2-dropdown-open.select2-drop-above .select2-choices {
+    border-color: #e3e4e8;
+    background-image: none;
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+	http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.1.xsd">
+
+	<description>Spring公共配置 </description>
+	
+	
+    <import resource="classpath*:spring/spring-mvc.xml" />
+	<import resource="classpath*:spring/spring-mybatis.xml" />
+	<!--<import resource="classpath*:spring/spring-security.xml" />-->
+	
+	<!-- 载入类路径下的properties属性文件 -->
+	<context:property-placeholder location="classpath*:*.properties,classpath*:properties/*.properties" />
+
+	<aop:aspectj-autoproxy />
+
+	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
+	<context:component-scan base-package="com.weizhuo.commu">
+		<!-- 在编译时就会织入声明为切面的类 因此服务器启动时要排除 -->
+		<context:exclude-filter expression=".*_Aspect.*" type="regex" />
+		<!-- 在装载spring mvc 时会加载这些Controller 因此在这边排除加载 如果不排除会造成事务失效 -->
+		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
+	
+<!-- 	<context:component-scan base-package="com.util.security">
+		在编译时就会织入声明为切面的类 因此服务器启动时要排除
+		<context:exclude-filter expression=".*_Aspect.*" type="regex" />
+		在装载spring mvc 时会加载这些Controller 因此在这边排除加载 如果不排除会造成事务失效
+		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
+ -->
+ 	
+ 	<!-- 缓存配置  -->
+	<!-- <cache:annotation-driven cache-manager="cacheManager" key-generator="cacheKeyGenerator"/>  -->
+	<cache:annotation-driven cache-manager="cacheManager"/> 
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcache"/> 
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="classpath:ehcache.xml"/>
+
+
+	<!-- 缓存配置:方式1 -->
+	<!-- 启用缓存注解功能(请将其配置在Spring主配置文件中) --> 
+	<!-- Spring自己的基于java.util.concurrent.ConcurrentHashMap实现的缓存管理器(该功能是从Spring3.1开始提供的)。只使用Spring自身提供的缓存器 --> 
+	<!-- <cache:annotation-driven cache-manager="cacheManager"/>   
+	<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">    
+	    <property name="caches">    
+	        <set>    
+	            <bean name="myCache" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean"/>    
+	        </set>    
+	    </property>    
+	</bean>    
+	 -->
+ 
+ 	<!-- 缓存配置:方式2 -->
+	<!-- Spring提供的基于的Ehcache实现的缓存管理器 (与当前配置一样)-->   
+	<!-- 
+	<cache:annotation-driven cache-manager="cacheManager"/>
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
+	    <property name="cacheManager" ref="cacheManagerFactory"/>
+	</bean>
+	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+	    <property name="configLocation" value="classpath:ehcache.xml"/>
+	</bean>
+	--> 
+	
+</beans>

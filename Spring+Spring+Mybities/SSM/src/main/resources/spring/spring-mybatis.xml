@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	http://www.springframework.org/schema/task  
+	http://www.springframework.org/schema/task/spring-task-3.1.xsd ">
+	
+	
+	<!-- 定时任务注解扫描器    定时任务转移到Linux定时任务中,以接口的方式调用
+	<task:annotation-driven/> 
+	<context:annotation-config/>  
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
+    <context:component-scan base-package="com.sankuiot.cc.core.common"/>
+	 -->
+	 
+	<!-- 使用annotation 自动注册bean,并保证@Required,@Autowired的属性被注入 -->
+	<context:component-scan base-package="com.weizhuo.commu.service">
+		<!-- 在编译时就会织入声明为切面的类 因此服务器启动时要排除 -->
+		<context:exclude-filter expression=".*_Aspect.*" type="regex" />
+		<!-- 在装载spring mvc 时会加载这些Controller 因此在这边排除加载 如果不排除会造成事务失效 -->
+		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" />
+	</context:component-scan>
+	
+	
+	<!-- 启用事务注解-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 配置事物管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- <property name="globalRollbackOnParticipationFailure" value="false"></property> -->
+    </bean>
+
+	
+	
+	<!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="location" value="classpath:jdbc.properties" />
+    </bean>
+    <!-- dbcp连接方式测试1 org.gjt.mm.mysql.Driver com.mysql.jdbc.Driver -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${driver}" />
+		<property name="jdbcUrl" value="${url}" />
+		<property name="user" value="${username}" />
+		<property name="password" value="${password}" />
+		
+		
+		<!-- 获取connnection时测试是否有效 -->
+		<property name="testConnectionOnCheckin" value="true" /> 
+		<!-- 自动测试的table名称 -->
+		<property name="automaticTestTable" value="C3P0TestTable" /> 
+		<!-- set to something much less than wait_timeout, prevents connections from going stale  -->
+		<property name="idleConnectionTestPeriod" value="18000" /> 
+		<!-- set to something slightly less than wait_timeout, preventing 'stale' connections from being handed out -->
+		<property name="maxIdleTime" value="25000" /> 
+		<!-- if you can take the performance 'hit', set to "true"  -->
+		<property name="testConnectionOnCheckout" value="true" /> 
+		
+		<!-- 
+		<property name="maxPoolSize" value="20" /> 
+		<property name="minPoolSize" value="5" /> 
+		<property name="maxStatements" value="200" /> 
+		<property name="initialPoolSize" value="10" /> 
+		<property name="maxIdleTime" value="60"/> 
+		<property name="idleConnectionTestPeriod" value="30" /> 
+		<property name="testConnectionOnCheckin" value="false" /> 
+		<property name="testConnectionOnCheckout" value="false" /> 
+		<property name="preferredTestQuery" value="SELECT 1 FROM DUAL" /> 
+		-->
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="mapperLocations" value="classpath*:com/weizhuo/db/map/*.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 写配置文件,引入每个DAO接口,比较繁琐 <bean id="baseMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+		<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper" 
+		/> <property name="sqlSessionFactory" ref="sqlSessionFactory" /> </bean> -->
+
+	<!--配置文件,配置包名将自动引入包中的所有接口 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.weizhuo.db.dao" />
+	</bean>
+
+	<!-- 事务管理 -->
+	<!-- <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="myPointcut" expression="execution(* com.twifi.service.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut" />
+	</aop:config> -->
+</beans>
