@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="manual_settle" >
+  <resultMap id="BaseResultMap" class="com.jubaopen.bean.settle.ManualSettle" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="cash_channel" property="cashChannel" jdbcType="VARCHAR" />
+    <result column="up_company" property="upCompany" jdbcType="VARCHAR" />
+    <result column="trans_no" property="transNo" jdbcType="VARCHAR" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="bank_mobile" property="bankMobile" jdbcType="VARCHAR" />
+    <result column="account_num" property="accountNum" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_province" property="bankProvince" jdbcType="VARCHAR" />
+    <result column="bank_city" property="bankCity" jdbcType="VARCHAR" />
+    <result column="bank_branch" property="bankBranch" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+    <result column="settle_amount" property="settleAmount" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="up_state" property="upState" jdbcType="VARCHAR" />
+    <result column="admin_user_id" property="adminUserId" jdbcType="INTEGER" />
+    <result column="response_str" property="responseStr" jdbcType="VARCHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="settle_remark" property="settleRemark" jdbcType="VARCHAR" />
+    <result column="settle_out_no" property="settleOutNo" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <iterate property="oredCriteria" conjunction="or" prepend="where" removeFirstPrepend="iterate" >
+      <isEqual property="oredCriteria[].valid" compareValue="true" >
+        (
+        <iterate prepend="and" property="oredCriteria[].criteriaWithoutValue" conjunction="and" >
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithSingleValue" conjunction="and" >
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithListValue" conjunction="and" >
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate property="oredCriteria[].criteriaWithListValue[].values" open="(" close=")" conjunction="," >
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate prepend="and" property="oredCriteria[].criteriaWithBetweenValue" conjunction="and" >
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cash_channel, up_company, trans_no, account_name, bank_mobile, account_num, bank_name, 
+    bank_province, bank_city, bank_branch, account_type, settle_amount, `state`, up_state, 
+    admin_user_id, response_str, subject, remark, settle_remark, settle_out_no, create_time, 
+    update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterClass="com.jubaopen.bean.settle.ManualSettleExample" >
+    select
+    <isParameterPresent >
+      <isEqual property="distinct" compareValue="true" >
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="manual_settle.Base_Column_List" />
+    from manual_settle
+    <isParameterPresent >
+      <include refid="manual_settle.Example_Where_Clause" />
+      <isNotNull property="orderByClause" >
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+    <isGreaterEqual property="totalCount" compareValue="0" >
+       limit #offset#,#limit#
+    </isGreaterEqual>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterClass="com.jubaopen.bean.settle.ManualSettle" >
+    select 
+    <include refid="manual_settle.Base_Column_List" />
+    from manual_settle
+    where id = #id:INTEGER#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.jubaopen.bean.settle.ManualSettle" >
+    delete from manual_settle
+    where id = #id:INTEGER#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.jubaopen.bean.settle.ManualSettleExample" >
+    delete from manual_settle
+    <include refid="manual_settle.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.jubaopen.bean.settle.ManualSettle" >
+    insert into manual_settle (cash_channel, up_company, trans_no, account_name, 
+      bank_mobile, account_num, bank_name, bank_province, 
+      bank_city, bank_branch, account_type, settle_amount, 
+      `state`, up_state, admin_user_id, response_str, 
+      subject, remark, settle_remark, settle_out_no, 
+      create_time, update_time)
+    values (#cashChannel:VARCHAR#, #upCompany:VARCHAR#, #transNo:VARCHAR#, #accountName:VARCHAR#, 
+      #bankMobile:VARCHAR#, #accountNum:VARCHAR#, #bankName:VARCHAR#, #bankProvince:VARCHAR#, 
+      #bankCity:VARCHAR#, #bankBranch:VARCHAR#, #accountType:VARCHAR#, #settleAmount:VARCHAR#, 
+      #state:INTEGER#, #upState:VARCHAR#, #adminUserId:INTEGER#, #responseStr:VARCHAR#, 
+      #subject:VARCHAR#, #remark:VARCHAR#, #settleRemark:VARCHAR#, #settleOutNo:VARCHAR#, 
+      #createTime:TIMESTAMP#, #updateTime:TIMESTAMP#)
+    <selectKey resultClass="java.lang.Integer" keyProperty="id" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <insert id="insertSelective" parameterClass="com.jubaopen.bean.settle.ManualSettle" >
+    insert into manual_settle
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="cashChannel" >
+        cash_channel
+      </isNotNull>
+      <isNotNull prepend="," property="upCompany" >
+        up_company
+      </isNotNull>
+      <isNotNull prepend="," property="transNo" >
+        trans_no
+      </isNotNull>
+      <isNotNull prepend="," property="accountName" >
+        account_name
+      </isNotNull>
+      <isNotNull prepend="," property="bankMobile" >
+        bank_mobile
+      </isNotNull>
+      <isNotNull prepend="," property="accountNum" >
+        account_num
+      </isNotNull>
+      <isNotNull prepend="," property="bankName" >
+        bank_name
+      </isNotNull>
+      <isNotNull prepend="," property="bankProvince" >
+        bank_province
+      </isNotNull>
+      <isNotNull prepend="," property="bankCity" >
+        bank_city
+      </isNotNull>
+      <isNotNull prepend="," property="bankBranch" >
+        bank_branch
+      </isNotNull>
+      <isNotNull prepend="," property="accountType" >
+        account_type
+      </isNotNull>
+      <isNotNull prepend="," property="settleAmount" >
+        settle_amount
+      </isNotNull>
+      <isNotNull prepend="," property="state" >
+        `state`
+      </isNotNull>
+      <isNotNull prepend="," property="upState" >
+        up_state
+      </isNotNull>
+      <isNotNull prepend="," property="adminUserId" >
+        admin_user_id
+      </isNotNull>
+      <isNotNull prepend="," property="responseStr" >
+        response_str
+      </isNotNull>
+      <isNotNull prepend="," property="subject" >
+        subject
+      </isNotNull>
+      <isNotNull prepend="," property="remark" >
+        remark
+      </isNotNull>
+      <isNotNull prepend="," property="settleRemark" >
+        settle_remark
+      </isNotNull>
+      <isNotNull prepend="," property="settleOutNo" >
+        settle_out_no
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        update_time
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(" >
+      <isNotNull prepend="," property="cashChannel" >
+        #cashChannel:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="upCompany" >
+        #upCompany:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transNo" >
+        #transNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="accountName" >
+        #accountName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankMobile" >
+        #bankMobile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="accountNum" >
+        #accountNum:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankName" >
+        #bankName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankProvince" >
+        #bankProvince:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankCity" >
+        #bankCity:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankBranch" >
+        #bankBranch:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="accountType" >
+        #accountType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="settleAmount" >
+        #settleAmount:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="state" >
+        #state:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="upState" >
+        #upState:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="adminUserId" >
+        #adminUserId:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="responseStr" >
+        #responseStr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="subject" >
+        #subject:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="remark" >
+        #remark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="settleRemark" >
+        #settleRemark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="settleOutNo" >
+        #settleOutNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        #updateTime:TIMESTAMP#
+      </isNotNull>
+      )
+    </dynamic>
+    <selectKey resultClass="java.lang.Integer" keyProperty="id" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+  </insert>
+  <select id="countByExample" parameterClass="com.jubaopen.bean.settle.ManualSettleExample" resultClass="java.lang.Integer" >
+    select count(*) from manual_settle
+    <include refid="manual_settle.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective" >
+    update manual_settle
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="record.id" >
+        id = #record.id:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cashChannel" >
+        cash_channel = #record.cashChannel:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.upCompany" >
+        up_company = #record.upCompany:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.transNo" >
+        trans_no = #record.transNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.accountName" >
+        account_name = #record.accountName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankMobile" >
+        bank_mobile = #record.bankMobile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.accountNum" >
+        account_num = #record.accountNum:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankName" >
+        bank_name = #record.bankName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankProvince" >
+        bank_province = #record.bankProvince:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankCity" >
+        bank_city = #record.bankCity:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.bankBranch" >
+        bank_branch = #record.bankBranch:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.accountType" >
+        account_type = #record.accountType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.settleAmount" >
+        settle_amount = #record.settleAmount:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.state" >
+        `state` = #record.state:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.upState" >
+        up_state = #record.upState:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.adminUserId" >
+        admin_user_id = #record.adminUserId:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.responseStr" >
+        response_str = #record.responseStr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.subject" >
+        subject = #record.subject:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.remark" >
+        remark = #record.remark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.settleRemark" >
+        settle_remark = #record.settleRemark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.settleOutNo" >
+        settle_out_no = #record.settleOutNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createTime" >
+        create_time = #record.createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.updateTime" >
+        update_time = #record.updateTime:TIMESTAMP#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent >
+      <include refid="manual_settle.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample" >
+    update manual_settle
+    set id = #record.id:INTEGER#,
+      cash_channel = #record.cashChannel:VARCHAR#,
+      up_company = #record.upCompany:VARCHAR#,
+      trans_no = #record.transNo:VARCHAR#,
+      account_name = #record.accountName:VARCHAR#,
+      bank_mobile = #record.bankMobile:VARCHAR#,
+      account_num = #record.accountNum:VARCHAR#,
+      bank_name = #record.bankName:VARCHAR#,
+      bank_province = #record.bankProvince:VARCHAR#,
+      bank_city = #record.bankCity:VARCHAR#,
+      bank_branch = #record.bankBranch:VARCHAR#,
+      account_type = #record.accountType:VARCHAR#,
+      settle_amount = #record.settleAmount:VARCHAR#,
+      `state` = #record.state:INTEGER#,
+      up_state = #record.upState:VARCHAR#,
+      admin_user_id = #record.adminUserId:INTEGER#,
+      response_str = #record.responseStr:VARCHAR#,
+      subject = #record.subject:VARCHAR#,
+      remark = #record.remark:VARCHAR#,
+      settle_remark = #record.settleRemark:VARCHAR#,
+      settle_out_no = #record.settleOutNo:VARCHAR#,
+      create_time = #record.createTime:TIMESTAMP#,
+      update_time = #record.updateTime:TIMESTAMP#
+    <isParameterPresent >
+      <include refid="manual_settle.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.jubaopen.bean.settle.ManualSettle" >
+    update manual_settle
+    <dynamic prepend="set" >
+      <isNotNull prepend="," property="cashChannel" >
+        cash_channel = #cashChannel:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="upCompany" >
+        up_company = #upCompany:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transNo" >
+        trans_no = #transNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="accountName" >
+        account_name = #accountName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankMobile" >
+        bank_mobile = #bankMobile:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="accountNum" >
+        account_num = #accountNum:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankName" >
+        bank_name = #bankName:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankProvince" >
+        bank_province = #bankProvince:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankCity" >
+        bank_city = #bankCity:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="bankBranch" >
+        bank_branch = #bankBranch:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="accountType" >
+        account_type = #accountType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="settleAmount" >
+        settle_amount = #settleAmount:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="state" >
+        `state` = #state:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="upState" >
+        up_state = #upState:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="adminUserId" >
+        admin_user_id = #adminUserId:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="responseStr" >
+        response_str = #responseStr:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="subject" >
+        subject = #subject:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="remark" >
+        remark = #remark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="settleRemark" >
+        settle_remark = #settleRemark:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="settleOutNo" >
+        settle_out_no = #settleOutNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createTime" >
+        create_time = #createTime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="updateTime" >
+        update_time = #updateTime:TIMESTAMP#
+      </isNotNull>
+    </dynamic>
+    where id = #id:INTEGER#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.jubaopen.bean.settle.ManualSettle" >
+    update manual_settle
+    set cash_channel = #cashChannel:VARCHAR#,
+      up_company = #upCompany:VARCHAR#,
+      trans_no = #transNo:VARCHAR#,
+      account_name = #accountName:VARCHAR#,
+      bank_mobile = #bankMobile:VARCHAR#,
+      account_num = #accountNum:VARCHAR#,
+      bank_name = #bankName:VARCHAR#,
+      bank_province = #bankProvince:VARCHAR#,
+      bank_city = #bankCity:VARCHAR#,
+      bank_branch = #bankBranch:VARCHAR#,
+      account_type = #accountType:VARCHAR#,
+      settle_amount = #settleAmount:VARCHAR#,
+      `state` = #state:INTEGER#,
+      up_state = #upState:VARCHAR#,
+      admin_user_id = #adminUserId:INTEGER#,
+      response_str = #responseStr:VARCHAR#,
+      subject = #subject:VARCHAR#,
+      remark = #remark:VARCHAR#,
+      settle_remark = #settleRemark:VARCHAR#,
+      settle_out_no = #settleOutNo:VARCHAR#,
+      create_time = #createTime:TIMESTAMP#,
+      update_time = #updateTime:TIMESTAMP#
+    where id = #id:INTEGER#
+  </update>
+</sqlMap>
